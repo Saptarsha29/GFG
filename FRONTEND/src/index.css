@@ -1,0 +1,118 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 9 9 11;
+    --foreground: 237 237 237;
+    
+    --card: 18 18 18;
+    --card-foreground: 237 237 237;
+    
+    --popover: 18 18 18;
+    --popover-foreground: 237 237 237;
+    
+    --primary: 0 240 255;
+    --primary-foreground: 0 0 0;
+    
+    --secondary: 28 28 30;
+    --secondary-foreground: 237 237 237;
+    
+    --muted: 28 28 30;
+    --muted-foreground: 161 161 170;
+    
+    --accent: 189 0 255;
+    --accent-foreground: 237 237 237;
+    
+    --destructive: 255 59 48;
+    --destructive-foreground: 237 237 237;
+    
+    --border: 39 39 42;
+    --input: 39 39 42;
+    --ring: 0 240 255;
+    
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Manrope', sans-serif;
+  }
+  code, pre {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer utilities {
+  .glass-effect {
+    backdrop-filter: blur(24px);
+    background: rgba(18, 18, 18, 0.7);
+  }
+  
+  .neon-glow {
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+  }
+  
+  .neon-glow-purple {
+    box-shadow: 0 0 15px rgba(189, 0, 255, 0.4);
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(9, 9, 11);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(39, 39, 42);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(63, 63, 70);
+}
+
+/* Animations */
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.5s ease-out;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 10px rgba(0, 240, 255, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.6);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}

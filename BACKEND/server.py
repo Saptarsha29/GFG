@@ -420,7 +420,7 @@ app = FastAPI(title="AI Business Intelligence Dashboard API")
 origins = [
     "http://localhost:3000",         # React local server
     "http://localhost:5173",         # Vite local server
-    "https://your-app.vercel.app"    # ⚠️ IMPORTANT: Deploy hone k baad apna asli Vercel URL yahan daalna!
+    "https://gfg-opal.vercel.app"    # ⚠️ IMPORTANT: Deploy hone k baad apna asli Vercel URL yahan daalna!
 ]
 
 app.add_middleware(

@@ -414,7 +414,7 @@ import ChartRenderer from "../COMPONENTS/ChartRenderer";
 import QueryHistory from "../COMPONENTS/QueryHistory";
 import ExamplePrompts from "../COMPONENTS/ExamplePrompts";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+const BACKEND_URL = "https://gfg-7f11.onrender.com";
 const API = `${BACKEND_URL}/api`;
 
 const Dashboard = () => {

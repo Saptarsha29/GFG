@@ -405,7 +405,7 @@ db = client[db_name]
 
 # Initialize data loader
 data_loader = DataLoader()
-df = data_loader.get_dataframe()
+df = None
 
 # Initialize components
 llm_agent = LLMAgent()
@@ -461,6 +461,9 @@ async def get_dataset_stats():
 
 @api_router.post("/ask")
 async def ask_question(request: QueryRequest):
+    global df
+    if df is None:
+        df = data_loader.get_dataframe()
     """Process natural language query and return chart data with insights"""
     try:
         logger.info(f"Received query: {request.query}")

@@ -597,200 +597,6 @@
 
 // // export default Dashboard;
 
-// import React, { useState, useEffect } from "react";
-// import axios from "axios";
-// import { Download, Menu, TrendingUp, AlertCircle, ArrowLeft, Zap } from "lucide-react";
-
-// import ChatInput from "../COMPONENTS/ChatInput";
-// import ChartRenderer from "../COMPONENTS/ChartRenderer"; 
-// import QueryHistory from "../COMPONENTS/QueryHistory";
-// import ExamplePrompts from "../COMPONENTS/ExamplePrompts";
-// // Automatically use Render URL
-// const API_BASE_URL = process.env.REACT_APP_API_URL || "https://gfg-7ff1.onrender.com";
-
-// const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "https://gfg-7ff1.onrender.com";
-// const API = `${BACKEND_URL}/api`;
-
-// const Dashboard = () => {
-//   const [isLoading, setIsLoading] = useState(false);
-//   const [currentResponse, setCurrentResponse] = useState(null);
-//   const [history, setHistory] = useState([]);
-//   const [showHistory, setShowHistory] = useState(true); 
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     fetchHistory();
-//   }, []);
-
-//   const fetchHistory = async () => {
-//     try {
-//       const response = await axios.get(`API_BASE_URL/history?limit=50`);
-//       setHistory(response.data.history || []);
-//     } catch (err) {
-//       console.error("Error fetching history:", err);
-//     }
-//   };
-
-//   const triggerError = (msg) => {
-//     setError(msg);
-//     setTimeout(() => setError(null), 5000);
-//   };
-
-//   const handleSubmitQuery = async (userQuery) => {
-//     setIsLoading(true);
-//     setError(null);
-
-//     try {
-//       const response = await axios.post(`API_BASE_URL/ask`, { query: userQuery });
-
-//       if (response.data.error) {
-//         triggerError(response.data.error);
-//       } else if (!response.data.charts || response.data.charts[0].data.length === 0) {
-//         triggerError("❌ Oops! Dataset not found.");
-//         setCurrentResponse(null);
-//       } else {
-//         setCurrentResponse(response.data);
-//       }
-//       await fetchHistory();
-//     } catch (err) {
-//       triggerError("⚠️ Server error!");
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   };
-
-//   const handleChartClick = (chartDataPoint) => {
-//     if(chartDataPoint && chartDataPoint.name) {
-//       const drillDownQuery = `Show breakdown for ${chartDataPoint.name}`;
-//       handleSubmitQuery(drillDownQuery);
-//     }
-//   };
-
-//   const handleDeleteQuery = async (queryId) => {
-//     try {
-//       await axios.delete(`${API}/history/${queryId}`);
-//       fetchHistory();
-//     } catch (err) {
-//       console.error("Delete error:", err);
-//     }
-//   };
-
-//   const handleClearHistory = async () => {
-//     if (!window.confirm("Clear all history?")) return;
-//     try {
-//       await axios.delete(`${API}/history`);
-//       setHistory([]);
-//       setCurrentResponse(null);
-//     } catch (err) {
-//       console.error("Clear error:", err);
-//     }
-//   };
-
-//   return (
-//     <div className="flex h-screen bg-gray-950 text-white overflow-hidden relative">
-      
-//       {error && (
-//         <div className="absolute top-6 right-6 z-50 bg-red-900 border border-red-500 text-red-100 px-6 py-4 rounded-xl shadow-[0_0_25px_rgba(239,68,68,0.8)] flex items-center gap-3">
-//           <AlertCircle className="w-6 h-6 text-red-400" />
-//           <p className="font-semibold">{error}</p>
-//         </div>
-//       )}
-
-//       {/* 🔥 FIX 1: Sidebar ko w-0 aur border-none diya taaki invisible block na bane */}
-//       <div 
-//         className={`${showHistory ? "w-80 border-r border-gray-800 opacity-100" : "w-0 border-none opacity-0"} transition-all duration-300 ease-in-out bg-gray-900 z-30 overflow-hidden flex-shrink-0`}
-//       >
-//         <div className="w-80 h-full">
-//           <QueryHistory
-//             history={history}
-//             onSelectQuery={(item) => {
-//               setCurrentResponse(item.response);
-//               if(window.innerWidth < 1024) setShowHistory(false);
-//             }}
-//             onDeleteQuery={handleDeleteQuery}
-//             onClearHistory={handleClearHistory}
-//             onClose={() => setShowHistory(false)}
-//           />
-//         </div>
-//       </div>
-
-//       <div className="flex-1 flex flex-col h-full overflow-hidden relative z-10">
-        
-//         <header className="border-b border-gray-800 bg-gray-950 p-4 flex justify-between items-center shadow-md relative z-40">
-//           <div className="flex items-center gap-4">
-            
-//             {/* 🔥 FIX 2: relative aur z-50 add kiya taaki button hamesha upar rahe */}
-//             <button 
-//               onClick={() => setShowHistory(!showHistory)}
-//               className="relative z-50 p-2 rounded-lg text-gray-400 hover:text-[#00f0ff] hover:bg-gray-800 transition-all duration-300 cursor-pointer"
-//             >
-//               <Menu className="w-6 h-6" />
-//             </button>
-
-//             <TrendingUp className="w-8 h-8 text-[#00f0ff]" />
-//             <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00f0ff] to-[#bd00ff] hidden sm:block">
-//               AI BI Dashboard
-//             </h1>
-//           </div>
-//         </header>
-
-//         <main className="flex-1 overflow-y-auto p-6 scroll-smooth">
-//           {!currentResponse ? (
-//             <div className="text-center mt-24">
-//               <TrendingUp className="w-20 h-20 mx-auto text-[#00f0ff] mb-6" />
-//               <h2 className="text-3xl font-extrabold mb-8 text-gray-100">Ask your data anything</h2>
-//               <ExamplePrompts onSelectPrompt={handleSubmitQuery} />
-//             </div>
-//           ) : (
-//             <div className="space-y-6 max-w-7xl mx-auto">
-              
-//               <div className="flex justify-between items-center mb-2">
-//                 {/* 🔥 FIX 3: Back Button ko z-50 dekar shield ke upar laya */}
-//                 <button 
-//                   onClick={() => setCurrentResponse(null)}
-//                   className="relative z-50 flex items-center gap-2 px-4 py-2 bg-gray-800 text-gray-300 rounded-lg hover:bg-[#00f0ff] hover:text-black hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all cursor-pointer"
-//                 >
-//                   <ArrowLeft className="w-5 h-5" /> Back to Dashboard
-//                 </button>
-//               </div>
-
-//               <div className="border border-gray-800 bg-gray-900 p-5 rounded-xl relative z-10">
-//                 <p className="text-sm text-gray-500 uppercase">Query</p>
-//                 <p className="text-xl font-semibold text-gray-200">{currentResponse.query}</p>
-//               </div>
-
-//               {currentResponse.insights && (
-//                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 relative z-10">
-//                   {currentResponse.insights.split('|').map((insight, i) => (
-//                     <div key={i} className="border border-gray-800 bg-gray-900 p-5 rounded-2xl hover:border-[#bd00ff]/50 transition-all">
-//                       <div className="flex items-start gap-4">
-//                         <Zap className="w-6 h-6 text-[#bd00ff]" />
-//                         <p className="text-gray-300 font-medium">{insight.trim()}</p>
-//                       </div>
-//                     </div>
-//                   ))}
-//                 </div>
-//               )}
-
-//               {currentResponse.charts && currentResponse.charts.map((chart, i) => (
-//                 <div key={i} className="h-[450px] relative z-10">
-//                   <ChartRenderer chart={chart} onBarClick={handleChartClick} />
-//                 </div>
-//               ))}
-//             </div>
-//           )}
-//         </main>
-
-//         <div className="p-6 border-t border-gray-800 bg-gray-950 relative z-40">
-//           <ChatInput onSubmit={handleSubmitQuery} isLoading={isLoading} placeholder="Ask something about the dataset..." />
-//         </div>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Dashboard;
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Download, Menu, TrendingUp, AlertCircle, ArrowLeft, Zap } from "lucide-react";
@@ -799,9 +605,10 @@ import ChatInput from "../COMPONENTS/ChatInput";
 import ChartRenderer from "../COMPONENTS/ChartRenderer"; 
 import QueryHistory from "../COMPONENTS/QueryHistory";
 import ExamplePrompts from "../COMPONENTS/ExamplePrompts";
+// Automatically use Render URL
+const API_BASE_URL = process.env.REACT_APP_API_URL || "https://gfg-7ff1.onrender.com";
 
-// Cleaned up URL section
-const BACKEND_URL = process.env.REACT_APP_API_URL || "https://gfg-7ff1.onrender.com";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "https://gfg-7ff1.onrender.com";
 const API = `${BACKEND_URL}/api`;
 
 const Dashboard = () => {
@@ -817,8 +624,7 @@ const Dashboard = () => {
 
   const fetchHistory = async () => {
     try {
-      // FIX: Used proper template literal syntax ${API}
-      const response = await axios.get(`${API}/history?limit=50`);
+      const response = await axios.get(`API_BASE_URL/history?limit=50`);
       setHistory(response.data.history || []);
     } catch (err) {
       console.error("Error fetching history:", err);
@@ -835,8 +641,7 @@ const Dashboard = () => {
     setError(null);
 
     try {
-      // FIX: Used proper template literal syntax ${API}
-      const response = await axios.post(`${API}/ask`, { query: userQuery });
+      const response = await axios.post(`API_BASE_URL/ask`, { query: userQuery });
 
       if (response.data.error) {
         triggerError(response.data.error);
@@ -891,7 +696,7 @@ const Dashboard = () => {
         </div>
       )}
 
-      {/* Sidebar */}
+      {/* 🔥 FIX 1: Sidebar ko w-0 aur border-none diya taaki invisible block na bane */}
       <div 
         className={`${showHistory ? "w-80 border-r border-gray-800 opacity-100" : "w-0 border-none opacity-0"} transition-all duration-300 ease-in-out bg-gray-900 z-30 overflow-hidden flex-shrink-0`}
       >
@@ -914,6 +719,7 @@ const Dashboard = () => {
         <header className="border-b border-gray-800 bg-gray-950 p-4 flex justify-between items-center shadow-md relative z-40">
           <div className="flex items-center gap-4">
             
+            {/* 🔥 FIX 2: relative aur z-50 add kiya taaki button hamesha upar rahe */}
             <button 
               onClick={() => setShowHistory(!showHistory)}
               className="relative z-50 p-2 rounded-lg text-gray-400 hover:text-[#00f0ff] hover:bg-gray-800 transition-all duration-300 cursor-pointer"
@@ -939,6 +745,7 @@ const Dashboard = () => {
             <div className="space-y-6 max-w-7xl mx-auto">
               
               <div className="flex justify-between items-center mb-2">
+                {/* 🔥 FIX 3: Back Button ko z-50 dekar shield ke upar laya */}
                 <button 
                   onClick={() => setCurrentResponse(null)}
                   className="relative z-50 flex items-center gap-2 px-4 py-2 bg-gray-800 text-gray-300 rounded-lg hover:bg-[#00f0ff] hover:text-black hover:shadow-[0_0_15px_rgba(0,240,255,0.4)] transition-all cursor-pointer"
@@ -983,3 +790,4 @@ const Dashboard = () => {
 };
 
 export default Dashboard;
+

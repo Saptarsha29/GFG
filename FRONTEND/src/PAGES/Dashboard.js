@@ -606,9 +606,9 @@ import ChartRenderer from "../COMPONENTS/ChartRenderer";
 import QueryHistory from "../COMPONENTS/QueryHistory";
 import ExamplePrompts from "../COMPONENTS/ExamplePrompts";
 // Automatically use Render URL
-const API_BASE_URL = process.env.REACT_APP_API_URL || "https://gfg-7ff1.onrender.com";
+const API_BASE_URL = process.env.REACT_APP_API_URL || "https://gfg-r3xw.onrender.com";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "https://gfg-7ff1.onrender.com";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "https://gfg-r3xw.onrender.com";
 const API = `${BACKEND_URL}/api`;
 
 const Dashboard = () => {

@@ -729,7 +729,7 @@ const Dashboard = () => {
 
             <TrendingUp className="w-8 h-8 text-[#00f0ff]" />
             <h1 className="text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#00f0ff] to-[#bd00ff] hidden sm:block">
-              AI BI Dashboard
+              InsighTra
             </h1>
           </div>
         </header>

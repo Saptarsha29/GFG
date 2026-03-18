@@ -641,7 +641,7 @@ const Dashboard = () => {
     setError(null);
 
     try {
-      const response = await axios.post(`API_BASE_URL/ask`, { query: userQuery });
+     const response = await axios.post(`${API_BASE_URL}/ask`, { query: userQuery });
 
       if (response.data.error) {
         triggerError(response.data.error);

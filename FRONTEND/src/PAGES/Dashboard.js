@@ -608,7 +608,7 @@ import ExamplePrompts from "../COMPONENTS/ExamplePrompts";
 // Automatically use Render URL
 const API_BASE_URL = process.env.REACT_APP_API_URL || "https://gfg-7ff1.onrender.com";
 
-const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
+const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "https://gfg-7ff1.onrender.com";
 const API = `${BACKEND_URL}/api`;
 
 const Dashboard = () => {

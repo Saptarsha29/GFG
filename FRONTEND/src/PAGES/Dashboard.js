@@ -605,6 +605,8 @@ import ChatInput from "../COMPONENTS/ChatInput";
 import ChartRenderer from "../COMPONENTS/ChartRenderer"; 
 import QueryHistory from "../COMPONENTS/QueryHistory";
 import ExamplePrompts from "../COMPONENTS/ExamplePrompts";
+// Automatically use Render URL
+const API_BASE_URL = process.env.REACT_APP_API_URL || "https://gfg-7ff1.onrender.com";
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL || "http://localhost:8000";
 const API = `${BACKEND_URL}/api`;
@@ -622,7 +624,7 @@ const Dashboard = () => {
 
   const fetchHistory = async () => {
     try {
-      const response = await axios.get(`${API}/history?limit=50`);
+      const response = await axios.get(`API_BASE_URL/history?limit=50`);
       setHistory(response.data.history || []);
     } catch (err) {
       console.error("Error fetching history:", err);
@@ -639,19 +641,19 @@ const Dashboard = () => {
     setError(null);
 
     try {
-      const response = await axios.post(`${API}/ask`, { query: userQuery });
+      const response = await axios.post(`API_BASE_URL/ask`, { query: userQuery });
 
       if (response.data.error) {
         triggerError(response.data.error);
       } else if (!response.data.charts || response.data.charts[0].data.length === 0) {
-        triggerError("❌ Oops! Dataset mein is sawal ka koi data nahi mila.");
+        triggerError("❌ Oops! Dataset not found.");
         setCurrentResponse(null);
       } else {
         setCurrentResponse(response.data);
       }
       await fetchHistory();
     } catch (err) {
-      triggerError("⚠️ Server error! Backend theek se chal raha hai?");
+      triggerError("⚠️ Server error!");
     } finally {
       setIsLoading(false);
     }

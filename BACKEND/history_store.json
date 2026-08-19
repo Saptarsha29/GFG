@@ -1,0 +1,80 @@
+[
+  {
+    "id": "679abb43-62bf-4519-b976-5c691688d913",
+    "query": "Show total revenue by region",
+    "response": {
+      "charts": [
+        {
+          "chart_type": "bar",
+          "title": "Total Revenue by Region",
+          "x_axis": "Region",
+          "y_axis": "Revenue ($)",
+          "data": [
+            {
+              "name": "Middle East",
+              "value": 8301844.5
+            },
+            {
+              "name": "North America",
+              "value": 8277217.84
+            },
+            {
+              "name": "Asia",
+              "value": 8175199.83
+            },
+            {
+              "name": "Europe",
+              "value": 8112311.57
+            }
+          ],
+          "description": "Regional revenue breakdown across geographic customer sectors."
+        }
+      ],
+      "insights": "\ud83c\udfc6 Top performer: Middle East ($8,301,844.50) | \ud83d\udcc9 Lowest: Europe ($8,112,311.57) | \ud83d\udcca Top 3 account for 75.3% of total | \ud83d\udca1 Regional revenue breakdown across geographic customer sectors.",
+      "query": "Show total revenue by region",
+      "timestamp": "2026-08-19T19:11:44.550810+00:00",
+      "error": null
+    },
+    "timestamp": "2026-08-19T19:11:44.551827+00:00",
+    "session_id": "aab12943-a026-47cd-8e9f-617ae8b72983"
+  },
+  {
+    "id": "f03418dd-463b-47f4-8945-60e687c9ca34",
+    "query": "Show total revenue by region",
+    "response": {
+      "charts": [
+        {
+          "chart_type": "bar",
+          "title": "Total Revenue by Region",
+          "x_axis": "Region",
+          "y_axis": "Revenue ($)",
+          "data": [
+            {
+              "name": "Middle East",
+              "value": 8301844.5
+            },
+            {
+              "name": "North America",
+              "value": 8277217.84
+            },
+            {
+              "name": "Asia",
+              "value": 8175199.83
+            },
+            {
+              "name": "Europe",
+              "value": 8112311.57
+            }
+          ],
+          "description": "Regional revenue breakdown across geographic customer sectors."
+        }
+      ],
+      "insights": "\ud83c\udfc6 Top performer: Middle East ($8,301,844.50) | \ud83d\udcc9 Lowest: Europe ($8,112,311.57) | \ud83d\udcca Top 3 account for 75.3% of total | \ud83d\udca1 Regional revenue breakdown across geographic customer sectors.",
+      "query": "Show total revenue by region",
+      "timestamp": "2026-08-19T19:08:47.795152+00:00",
+      "error": null
+    },
+    "timestamp": "2026-08-19T19:08:47.802984+00:00",
+    "session_id": "e96f0068-5591-455e-a625-dbaa08470923"
+  }
+]
